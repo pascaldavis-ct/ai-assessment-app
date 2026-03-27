@@ -3,6 +3,7 @@
 import { motion } from "framer-motion"
 import { ArrowRight, Sparkles, Target, Shield, Users, Rocket } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import Link from "next/link"
 
 interface IntroScreenProps {
   onStart: () => void
@@ -99,14 +100,22 @@ export function IntroScreen({ onStart }: IntroScreenProps) {
       </div>
 
       {/* Footer */}
-      <footer className="px-6 py-6 border-t border-border">
-        <div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p className="text-xs text-muted-foreground text-center sm:text-left">
-            Based on research by Code&Theory&apos;s AI Strategy Practice
-          </p>
-          <p className="text-xs text-muted-foreground">
-            For boards, executives & ambitious operators
-          </p>
+      <footer className="px-6 py-8 border-t border-border">
+        <div className="max-w-6xl mx-auto flex flex-col items-center gap-6">
+          <Link 
+            href="/framework"
+            className="text-base font-medium text-accent hover:text-accent/80 underline underline-offset-4 transition-colors"
+          >
+            Learn more about the Five Pillars Framework
+          </Link>
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-4 w-full">
+            <p className="text-xs text-muted-foreground text-center sm:text-left">
+              Based on research by Code&Theory&apos;s AI Strategy Practice
+            </p>
+            <p className="text-xs text-muted-foreground">
+              For boards, executives & ambitious operators
+            </p>
+          </div>
         </div>
       </footer>
     </div>
