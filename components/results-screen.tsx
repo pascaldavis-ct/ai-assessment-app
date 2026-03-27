@@ -1,20 +1,21 @@
 "use client"
 
 import { motion } from "framer-motion"
-import { ArrowRight, RotateCcw, Share2, Sparkles, Target, Shield, Users, Rocket } from "lucide-react"
+import { ArrowLeft, ArrowRight, RotateCcw, Share2, Sparkles, Target, Shield, Users, Rocket } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
 import { type Answer } from "@/app/page"
-import { questions, getOverallVerdict, scoreLabels } from "@/lib/assessment-data"
+import { questions, getOverallVerdict } from "@/lib/assessment-data"
 
 interface ResultsScreenProps {
   answers: Answer[]
   onRestart: () => void
+  onBack?: () => void
 }
 
 const dimensionIcons = [Sparkles, Target, Shield, Users, Rocket]
 
-export function ResultsScreen({ answers, onRestart }: ResultsScreenProps) {
+export function ResultsScreen({ answers, onRestart, onBack }: ResultsScreenProps) {
   const totalScore = answers.reduce((sum, a) => sum + a.score, 0)
   const avgScore = totalScore / answers.length
   const verdict = getOverallVerdict(totalScore)
@@ -118,7 +119,7 @@ export function ResultsScreen({ answers, onRestart }: ResultsScreenProps) {
               {answers.map((answer, index) => {
                 const question = questions[answer.questionId]
                 const Icon = dimensionIcons[index]
-                const scoreInfo = scoreLabels[answer.score]
+                const answerOption = question.answerOptions.find(opt => opt.score === answer.score)
                 
                 return (
                   <motion.div
@@ -159,14 +160,16 @@ export function ResultsScreen({ answers, onRestart }: ResultsScreenProps) {
                           />
                         </div>
                         
-                        <p className={cn(
-                          "text-xs font-medium",
-                          answer.score >= 4 && "text-accent",
-                          answer.score === 3 && "text-yellow-400",
-                          answer.score <= 2 && "text-destructive"
-                        )}>
-                          {scoreInfo.label}: {scoreInfo.description}
-                        </p>
+                        {answerOption && (
+                          <p className={cn(
+                            "text-xs font-medium",
+                            answer.score >= 4 && "text-accent",
+                            answer.score === 3 && "text-yellow-400",
+                            answer.score <= 2 && "text-destructive"
+                          )}>
+                            {answerOption.label}
+                          </p>
+                        )}
                       </div>
                     </div>
                   </motion.div>
@@ -214,6 +217,17 @@ export function ResultsScreen({ answers, onRestart }: ResultsScreenProps) {
               <Share2 className="mr-2 w-4 h-4" />
               Share Results
             </Button>
+            {onBack && (
+              <Button
+                onClick={onBack}
+                variant="outline"
+                size="lg"
+                className="border-border hover:bg-secondary px-6 py-6 text-base font-semibold group"
+              >
+                <ArrowLeft className="mr-2 w-4 h-4" />
+                Review Answers
+              </Button>
+            )}
             <Button
               onClick={onRestart}
               variant="outline"
@@ -221,16 +235,16 @@ export function ResultsScreen({ answers, onRestart }: ResultsScreenProps) {
               className="border-border hover:bg-secondary px-6 py-6 text-base font-semibold group"
             >
               <RotateCcw className="mr-2 w-4 h-4" />
-              Take Again
+              Start Over
             </Button>
             <Button
               asChild
-              variant="ghost"
+              variant="outline"
               size="lg"
-              className="text-muted-foreground hover:text-foreground px-6 py-6 text-base group"
+              className="border-accent text-accent hover:bg-accent/10 px-6 py-6 text-base font-semibold group"
             >
-              <a href="https://www.codeandtheory.com" target="_blank" rel="noopener noreferrer">
-                Learn More
+              <a href="/framework">
+                Learn more about our AI adoption framework
                 <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </a>
             </Button>

@@ -33,10 +33,29 @@ export default function AIHealthCheck() {
     }
   }
 
+  const handleBack = () => {
+    if (currentQuestionIndex > 0) {
+      // Remove the last answer and go back
+      setAnswers((prev) => prev.slice(0, -1))
+      setCurrentQuestionIndex((prev) => prev - 1)
+    } else {
+      // Go back to intro
+      setCurrentStep("intro")
+    }
+  }
+
   const handleRestart = () => {
     setCurrentStep("intro")
     setCurrentQuestionIndex(0)
     setAnswers([])
+  }
+
+  const handleBackFromResults = () => {
+    // Go back to the last question to review/change
+    setCurrentStep("questions")
+    setCurrentQuestionIndex(questions.length - 1)
+    // Remove the last answer so they can re-answer
+    setAnswers((prev) => prev.slice(0, -1))
   }
 
   return (
@@ -48,9 +67,16 @@ export default function AIHealthCheck() {
           questionNumber={currentQuestionIndex + 1}
           totalQuestions={questions.length}
           onAnswer={handleAnswer}
+          onBack={handleBack}
         />
       )}
-      {currentStep === "results" && <ResultsScreen answers={answers} onRestart={handleRestart} />}
+      {currentStep === "results" && (
+        <ResultsScreen 
+          answers={answers} 
+          onRestart={handleRestart} 
+          onBack={handleBackFromResults}
+        />
+      )}
     </main>
   )
 }

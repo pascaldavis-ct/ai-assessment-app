@@ -2,16 +2,17 @@
 
 import { useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
-import { AlertTriangle, CheckCircle2, ChevronDown, ChevronUp } from "lucide-react"
+import { AlertTriangle, ArrowLeft, CheckCircle2, ChevronDown, ChevronUp } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
-import { type Question, scoreLabels } from "@/lib/assessment-data"
+import { type Question } from "@/lib/assessment-data"
 
 interface QuestionCardProps {
   question: Question
   questionNumber: number
   totalQuestions: number
   onAnswer: (score: number) => void
+  onBack: () => void
 }
 
 export function QuestionCard({
@@ -19,6 +20,7 @@ export function QuestionCard({
   questionNumber,
   totalQuestions,
   onAnswer,
+  onBack,
 }: QuestionCardProps) {
   const [selectedScore, setSelectedScore] = useState<number | null>(null)
   const [showDetails, setShowDetails] = useState(false)
@@ -31,15 +33,26 @@ export function QuestionCard({
     }
   }
 
+  const selectedOption = question.answerOptions.find(opt => opt.score === selectedScore)
+
   return (
     <div className="min-h-screen flex flex-col">
       {/* Progress Header */}
       <header className="px-6 py-6 border-b border-border">
         <div className="max-w-4xl mx-auto">
           <div className="flex items-center justify-between mb-4">
-            <span className="text-sm text-muted-foreground">
-              Question {questionNumber} of {totalQuestions}
-            </span>
+            <div className="flex items-center gap-4">
+              <button
+                onClick={onBack}
+                className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
+              >
+                <ArrowLeft className="w-4 h-4" />
+                Back
+              </button>
+              <span className="text-sm text-muted-foreground">
+                Question {questionNumber} of {totalQuestions}
+              </span>
+            </div>
             <span className="text-sm font-medium text-accent">{question.dimension}</span>
           </div>
           <div className="h-1 bg-secondary rounded-full overflow-hidden">
@@ -138,69 +151,69 @@ export function QuestionCard({
               </AnimatePresence>
             </div>
 
-            {/* Score Selection */}
-            <div className="space-y-6">
-              <div className="grid grid-cols-5 gap-2 sm:gap-3">
-                {[1, 2, 3, 4, 5].map((score) => (
-                  <button
-                    key={score}
-                    onClick={() => setSelectedScore(score)}
-                    className={cn(
-                      "relative flex flex-col items-center justify-center p-3 sm:p-4 rounded-lg border-2 transition-all",
-                      selectedScore === score
-                        ? "border-accent bg-accent/10"
-                        : "border-border bg-card hover:border-muted-foreground"
-                    )}
-                  >
-                    <span className={cn(
-                      "text-2xl sm:text-3xl font-bold",
-                      selectedScore === score ? "text-accent" : "text-foreground"
-                    )}>
-                      {score}
-                    </span>
-                    <span className={cn(
-                      "text-xs mt-1 hidden sm:block",
-                      selectedScore === score ? "text-accent" : "text-muted-foreground"
-                    )}>
-                      {scoreLabels[score].label}
-                    </span>
-                  </button>
-                ))}
-              </div>
-
-              {/* Score Description */}
-              <AnimatePresence mode="wait">
-                {selectedScore && (
-                  <motion.div
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -10 }}
-                    className="text-center"
-                  >
-                    <p className="text-sm text-muted-foreground">
-                      <span className="font-semibold text-foreground">{scoreLabels[selectedScore].label}:</span>{" "}
-                      {scoreLabels[selectedScore].description}
-                    </p>
-                  </motion.div>
-                )}
-              </AnimatePresence>
-
-              {/* Submit Button */}
-              <div className="flex justify-center">
-                <Button
-                  onClick={handleSubmit}
-                  disabled={selectedScore === null}
-                  size="lg"
+            {/* Answer Options - Question-specific */}
+            <div className="space-y-3">
+              {question.answerOptions.map((option) => (
+                <button
+                  key={option.score}
+                  onClick={() => setSelectedScore(option.score)}
                   className={cn(
-                    "px-8 py-6 text-base font-semibold transition-all",
-                    selectedScore !== null
-                      ? "bg-foreground text-background hover:bg-foreground/90"
-                      : "bg-muted text-muted-foreground"
+                    "w-full text-left p-4 rounded-lg border-2 transition-all",
+                    selectedScore === option.score
+                      ? "border-accent bg-accent/10"
+                      : "border-border bg-card hover:border-muted-foreground"
                   )}
                 >
-                  {questionNumber === totalQuestions ? "See Results" : "Next Question"}
-                </Button>
-              </div>
+                  <div className="flex items-start gap-4">
+                    <div className={cn(
+                      "flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold",
+                      selectedScore === option.score
+                        ? "bg-accent text-accent-foreground"
+                        : "bg-secondary text-foreground"
+                    )}>
+                      {option.score}
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <p className={cn(
+                        "font-semibold text-sm sm:text-base",
+                        selectedScore === option.score ? "text-accent" : "text-foreground"
+                      )}>
+                        {option.label}
+                      </p>
+                      <p className="text-xs sm:text-sm text-muted-foreground mt-1 leading-relaxed">
+                        {option.description}
+                      </p>
+                    </div>
+                  </div>
+                </button>
+              ))}
+            </div>
+
+            {/* Navigation Buttons */}
+            <div className="flex items-center justify-between mt-8 gap-4">
+              <Button
+                onClick={onBack}
+                variant="outline"
+                size="lg"
+                className="px-6 py-6 text-base font-semibold border-border hover:bg-secondary"
+                disabled={questionNumber === 1}
+              >
+                <ArrowLeft className="mr-2 w-4 h-4" />
+                Previous Question
+              </Button>
+              <Button
+                onClick={handleSubmit}
+                disabled={selectedScore === null}
+                size="lg"
+                className={cn(
+                  "px-8 py-6 text-base font-semibold transition-all",
+                  selectedScore !== null
+                    ? "bg-foreground text-background hover:bg-foreground/90"
+                    : "bg-muted text-muted-foreground"
+                )}
+              >
+                {questionNumber === totalQuestions ? "See Results" : "Next Question"}
+              </Button>
             </div>
           </motion.div>
         </AnimatePresence>
