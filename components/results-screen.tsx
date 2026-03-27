@@ -239,12 +239,12 @@ export function ResultsScreen({ answers, onRestart, onBack }: ResultsScreenProps
             </Button>
             <Button
               asChild
-              variant="ghost"
+              variant="outline"
               size="lg"
-              className="text-muted-foreground hover:text-foreground px-6 py-6 text-base group"
+              className="border-accent text-accent hover:bg-accent/10 px-6 py-6 text-base font-semibold group"
             >
-              <a href="https://www.codeandtheory.com" target="_blank" rel="noopener noreferrer">
-                Learn More
+              <a href="/framework">
+                Learn More About the Framework
                 <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </a>
             </Button>
