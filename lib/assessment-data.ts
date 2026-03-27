@@ -1,3 +1,9 @@
+export type AnswerOption = {
+  score: number
+  label: string
+  description: string
+}
+
 export type Question = {
   id: number
   dimension: string
@@ -6,6 +12,7 @@ export type Question = {
   clarifiers: string[]
   healthyLooksLike: string
   redFlags: string[]
+  answerOptions: AnswerOption[]
 }
 
 export const questions: Question[] = [
@@ -25,6 +32,33 @@ export const questions: Question[] = [
       "Sponsorship by slide deck",
       "No exec time on tools",
       "Champions working nights/weekends"
+    ],
+    answerOptions: [
+      {
+        score: 1,
+        label: "No clear owner",
+        description: "AI is everyone's hobby, no one's job. No named exec, no budget line, no accountability."
+      },
+      {
+        score: 2,
+        label: "Sponsor in name only",
+        description: "Someone's name is on it, but they haven't used AI and decisions happen by committee or not at all."
+      },
+      {
+        score: 3,
+        label: "Emerging ownership",
+        description: "A leader is accountable with some budget, but limited hands-on experience and inconsistent decision-making."
+      },
+      {
+        score: 4,
+        label: "Active, informed sponsor",
+        description: "Named exec with budget authority who has used AI personally and makes regular ship/scale/kill decisions."
+      },
+      {
+        score: 5,
+        label: "Hands-on champion",
+        description: "Exec owner with deep hands-on experience, recurring funding, explicit trade-offs, and visible adoption from the top."
+      }
     ]
   },
   {
@@ -42,6 +76,33 @@ export const questions: Question[] = [
       "A long list of ideas, no ranking",
       "\"We're doing AI everywhere\"",
       "No baselines exist"
+    ],
+    answerOptions: [
+      {
+        score: 1,
+        label: "No method",
+        description: "Priorities driven by whoever yells loudest or latest vendor demo. No baselines, no ranking."
+      },
+      {
+        score: 2,
+        label: "Ad hoc decisions",
+        description: "Some discussion of priorities but no repeatable framework. Decisions feel political."
+      },
+      {
+        score: 3,
+        label: "Emerging discipline",
+        description: "A rubric exists on paper. Some baselines captured, but not consistently applied."
+      },
+      {
+        score: 4,
+        label: "Structured pipeline",
+        description: "Use cases ranked by value/feasibility/risk with baselines. Outcome-focused, not tool-focused."
+      },
+      {
+        score: 5,
+        label: "Rigorous prioritization",
+        description: "Repeatable rubric consistently applied. Every initiative has baselines, owners, and clear sequencing."
+      }
     ]
   },
   {
@@ -59,6 +120,33 @@ export const questions: Question[] = [
       "Shadow AI everywhere",
       "A blanket ban that drives it underground",
       "No incident playbooks"
+    ],
+    answerOptions: [
+      {
+        score: 1,
+        label: "No guardrails",
+        description: "Either a blanket ban (driving shadow AI underground) or complete wild west—both are failing."
+      },
+      {
+        score: 2,
+        label: "Reactive policies",
+        description: "Rules exist but are unclear, inconsistent, or created in response to incidents rather than ahead of them."
+      },
+      {
+        score: 3,
+        label: "Basic framework",
+        description: "Policy exists and is somewhat understood. Some approved tools, but gaps in risk tiers and incident response."
+      },
+      {
+        score: 4,
+        label: "Clear, tiered approach",
+        description: "Plain-English policy with approved tools, risk tiers, and proportionate gates. Teams know the rules."
+      },
+      {
+        score: 5,
+        label: "Enabling guardrails",
+        description: "Comprehensive, clear policy that enables speed. Risk tiers, incident playbooks, and escalation paths all in place."
+      }
     ]
   },
   {
@@ -76,6 +164,33 @@ export const questions: Question[] = [
       "\"We bought a tool—adoption will happen\"",
       "Champions expected to work after hours",
       "No feedback loops"
+    ],
+    answerOptions: [
+      {
+        score: 1,
+        label: "No one owns adoption",
+        description: "\"We bought tools—adoption will happen.\" Spoiler: it won't. No named champions, no enablement."
+      },
+      {
+        score: 2,
+        label: "Informal champions",
+        description: "Some enthusiasts exist but work on adoption in spare time. No formal authority or training support."
+      },
+      {
+        score: 3,
+        label: "Recognized but under-resourced",
+        description: "Champions are named but lack dedicated time, training budget, or real authority to drive change."
+      },
+      {
+        score: 4,
+        label: "Empowered champion network",
+        description: "Named champions across functions with time, training, and authority. Role-based enablement exists."
+      },
+      {
+        score: 5,
+        label: "Adoption engine running",
+        description: "Champion network with full support, career incentives aligned, feedback loops to product/policy, top-to-bottom enablement."
+      }
     ]
   },
   {
@@ -93,17 +208,36 @@ export const questions: Question[] = [
       "Prototype graveyard",
       "Success defined as 'leadership liked the demo'",
       "No scaling plan"
+    ],
+    answerOptions: [
+      {
+        score: 1,
+        label: "Demo theater",
+        description: "Pilots built to impress leadership, not to scale. No baselines, no kill criteria. Prototype graveyard growing."
+      },
+      {
+        score: 2,
+        label: "Pilots without rigor",
+        description: "Some pilots running but unclear success criteria. Value claims without baselines. No scaling plan."
+      },
+      {
+        score: 3,
+        label: "Mixed discipline",
+        description: "Some pilots have baselines and criteria, others don't. Scaling path exists in theory but untested."
+      },
+      {
+        score: 4,
+        label: "Structured pilots",
+        description: "Time-boxed pilots with baselines, kill/scale criteria, and value + adoption metrics. Scaling plan defined."
+      },
+      {
+        score: 5,
+        label: "Scale-ready momentum",
+        description: "All pilots instrumented with clear criteria. Operating model for scale proven. Pilots ship or die quickly with learnings captured."
+      }
     ]
   }
 ]
-
-export const scoreLabels: Record<number, { label: string; description: string }> = {
-  1: { label: "Fragile", description: "High risk of AI theater, shadow AI, or reputational damage" },
-  2: { label: "Weak", description: "Significant gaps that will cause problems at scale" },
-  3: { label: "Promising", description: "Momentum possible, but gaps will show under pressure" },
-  4: { label: "Healthy", description: "Strategy is investable; execution is the main risk" },
-  5: { label: "Excellent", description: "Strong foundation for compounding advantage" }
-}
 
 export function getOverallVerdict(totalScore: number): {
   verdict: "stay" | "cautious" | "go"

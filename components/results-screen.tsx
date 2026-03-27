@@ -5,7 +5,7 @@ import { ArrowRight, RotateCcw, Share2, Sparkles, Target, Shield, Users, Rocket 
 import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
 import { type Answer } from "@/app/page"
-import { questions, getOverallVerdict, scoreLabels } from "@/lib/assessment-data"
+import { questions, getOverallVerdict } from "@/lib/assessment-data"
 
 interface ResultsScreenProps {
   answers: Answer[]
@@ -118,7 +118,7 @@ export function ResultsScreen({ answers, onRestart }: ResultsScreenProps) {
               {answers.map((answer, index) => {
                 const question = questions[answer.questionId]
                 const Icon = dimensionIcons[index]
-                const scoreInfo = scoreLabels[answer.score]
+                const answerOption = question.answerOptions.find(opt => opt.score === answer.score)
                 
                 return (
                   <motion.div
@@ -159,14 +159,16 @@ export function ResultsScreen({ answers, onRestart }: ResultsScreenProps) {
                           />
                         </div>
                         
-                        <p className={cn(
-                          "text-xs font-medium",
-                          answer.score >= 4 && "text-accent",
-                          answer.score === 3 && "text-yellow-400",
-                          answer.score <= 2 && "text-destructive"
-                        )}>
-                          {scoreInfo.label}: {scoreInfo.description}
-                        </p>
+                        {answerOption && (
+                          <p className={cn(
+                            "text-xs font-medium",
+                            answer.score >= 4 && "text-accent",
+                            answer.score === 3 && "text-yellow-400",
+                            answer.score <= 2 && "text-destructive"
+                          )}>
+                            {answerOption.label}
+                          </p>
+                        )}
                       </div>
                     </div>
                   </motion.div>
