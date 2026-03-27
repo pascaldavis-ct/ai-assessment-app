@@ -1,7 +1,7 @@
 "use client"
 
 import { motion } from "framer-motion"
-import { ArrowRight, RotateCcw, Share2, Sparkles, Target, Shield, Users, Rocket } from "lucide-react"
+import { ArrowLeft, ArrowRight, RotateCcw, Share2, Sparkles, Target, Shield, Users, Rocket } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
 import { type Answer } from "@/app/page"
@@ -10,11 +10,12 @@ import { questions, getOverallVerdict } from "@/lib/assessment-data"
 interface ResultsScreenProps {
   answers: Answer[]
   onRestart: () => void
+  onBack?: () => void
 }
 
 const dimensionIcons = [Sparkles, Target, Shield, Users, Rocket]
 
-export function ResultsScreen({ answers, onRestart }: ResultsScreenProps) {
+export function ResultsScreen({ answers, onRestart, onBack }: ResultsScreenProps) {
   const totalScore = answers.reduce((sum, a) => sum + a.score, 0)
   const avgScore = totalScore / answers.length
   const verdict = getOverallVerdict(totalScore)
@@ -216,6 +217,17 @@ export function ResultsScreen({ answers, onRestart }: ResultsScreenProps) {
               <Share2 className="mr-2 w-4 h-4" />
               Share Results
             </Button>
+            {onBack && (
+              <Button
+                onClick={onBack}
+                variant="outline"
+                size="lg"
+                className="border-border hover:bg-secondary px-6 py-6 text-base font-semibold group"
+              >
+                <ArrowLeft className="mr-2 w-4 h-4" />
+                Review Answers
+              </Button>
+            )}
             <Button
               onClick={onRestart}
               variant="outline"
@@ -223,7 +235,7 @@ export function ResultsScreen({ answers, onRestart }: ResultsScreenProps) {
               className="border-border hover:bg-secondary px-6 py-6 text-base font-semibold group"
             >
               <RotateCcw className="mr-2 w-4 h-4" />
-              Take Again
+              Start Over
             </Button>
             <Button
               asChild

@@ -50,6 +50,14 @@ export default function AIHealthCheck() {
     setAnswers([])
   }
 
+  const handleBackFromResults = () => {
+    // Go back to the last question to review/change
+    setCurrentStep("questions")
+    setCurrentQuestionIndex(questions.length - 1)
+    // Remove the last answer so they can re-answer
+    setAnswers((prev) => prev.slice(0, -1))
+  }
+
   return (
     <main className="min-h-screen bg-background text-foreground">
       {currentStep === "intro" && <IntroScreen onStart={handleStart} />}
@@ -62,7 +70,13 @@ export default function AIHealthCheck() {
           onBack={handleBack}
         />
       )}
-      {currentStep === "results" && <ResultsScreen answers={answers} onRestart={handleRestart} />}
+      {currentStep === "results" && (
+        <ResultsScreen 
+          answers={answers} 
+          onRestart={handleRestart} 
+          onBack={handleBackFromResults}
+        />
+      )}
     </main>
   )
 }

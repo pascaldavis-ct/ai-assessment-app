@@ -47,7 +47,7 @@ export function QuestionCard({
                 className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
               >
                 <ArrowLeft className="w-4 h-4" />
-                {questionNumber === 1 ? "Back to intro" : "Previous question"}
+                Back
               </button>
               <span className="text-sm text-muted-foreground">
                 Question {questionNumber} of {totalQuestions}
@@ -189,8 +189,18 @@ export function QuestionCard({
               ))}
             </div>
 
-            {/* Submit Button */}
-            <div className="flex justify-center mt-8">
+            {/* Navigation Buttons */}
+            <div className="flex items-center justify-between mt-8 gap-4">
+              <Button
+                onClick={onBack}
+                variant="outline"
+                size="lg"
+                className="px-6 py-6 text-base font-semibold border-border hover:bg-secondary"
+                disabled={questionNumber === 1}
+              >
+                <ArrowLeft className="mr-2 w-4 h-4" />
+                Previous Question
+              </Button>
               <Button
                 onClick={handleSubmit}
                 disabled={selectedScore === null}
