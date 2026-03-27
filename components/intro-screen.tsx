@@ -47,9 +47,10 @@ export function IntroScreen({ onStart }: IntroScreenProps) {
               <span className="text-muted-foreground">AI theater?</span>
             </h1>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed text-pretty">
-              Management theory doesn&apos;t repeat itself. It rhymes. AI is the latest verse: new tech, 
-              same old organizational physics. This 5-question diagnostic reveals whether you&apos;re 
-              compounding—or cosplaying.
+              Your company&apos;s AI strategy isn&apos;t just a boardroom topic—it&apos;s a signal about your future. 
+              The question isn&apos;t whether leadership talks about transformation—everyone does. It&apos;s whether 
+              they&apos;re building something real. Whether you&apos;re leading the charge or betting your career 
+              on the outcome, five questions reveal if you&apos;re in a strong bet or stuck in AI theater.
             </p>
           </motion.div>
 
@@ -91,7 +92,7 @@ export function IntroScreen({ onStart }: IntroScreenProps) {
               <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </Button>
             <p className="text-xs text-muted-foreground">
-              Takes about 3 minutes • 5 questions • Instant results
+              5 minutes • 5 questions • Instant results
             </p>
           </motion.div>
         </div>
