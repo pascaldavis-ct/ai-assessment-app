@@ -106,7 +106,7 @@ export function IntroScreen({ onStart }: IntroScreenProps) {
             href="/framework"
             className="text-base font-medium text-accent hover:text-accent/80 underline underline-offset-4 transition-colors"
           >
-            Learn more about the Five Pillars Framework
+            Learn more about our AI adoption framework
           </Link>
           <div className="flex flex-col sm:flex-row items-center justify-between gap-4 w-full">
             <p className="text-xs text-muted-foreground text-center sm:text-left">

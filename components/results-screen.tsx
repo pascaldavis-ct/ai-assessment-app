@@ -244,7 +244,7 @@ export function ResultsScreen({ answers, onRestart, onBack }: ResultsScreenProps
               className="border-accent text-accent hover:bg-accent/10 px-6 py-6 text-base font-semibold group"
             >
               <a href="/framework">
-                Learn More About the Framework
+                Learn more about our AI adoption framework
                 <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </a>
             </Button>
