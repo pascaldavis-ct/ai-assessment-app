@@ -43,7 +43,7 @@ export function IntroScreen({ onStart }: IntroScreenProps) {
             </p>
             <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-foreground mb-6 leading-tight text-balance">
               Is your AI strategy{" "}
-              <span className="text-accent">investable</span>—or just{" "}
+              <span className="text-accent">a strong bet</span>—or just{" "}
               <span className="text-muted-foreground">AI theater?</span>
             </h1>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed text-pretty">

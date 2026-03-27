@@ -250,21 +250,21 @@ export function getOverallVerdict(totalScore: number): {
   if (avgScore >= 3.5) {
     return {
       verdict: "stay",
-      title: "STAY & INVEST",
+      title: "STRONG BET",
       description: "Your organization shows strong signals of AI readiness. Real ownership, clear priorities, usable guardrails, empowered champions, and pilots with baselines.",
       recommendation: "Focus on execution velocity and scaling successful pilots. Your competitive advantage is compounding."
     }
   } else if (avgScore >= 2.5) {
     return {
       verdict: "cautious",
-      title: "PROCEED WITH CAUTION",
+      title: "MIXED SIGNALS",
       description: "Promising foundations but notable gaps exist. You'll feel the cracks at scale if these aren't addressed.",
       recommendation: "Prioritize closing the weakest dimension gaps before scaling further. The gaps will only amplify."
     }
   } else {
     return {
       verdict: "go",
-      title: "HEDGE OR GO",
+      title: "AI THEATER",
       description: "High probability of endless demos, no trade-offs, policy by panic, and adoption treated as 'training people to click the button.'",
       recommendation: "Either drive fundamental change from within or consider whether your AI ambitions are better served elsewhere."
     }
