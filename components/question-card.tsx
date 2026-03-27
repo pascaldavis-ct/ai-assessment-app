@@ -2,7 +2,7 @@
 
 import { useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
-import { AlertTriangle, CheckCircle2, ChevronDown, ChevronUp } from "lucide-react"
+import { AlertTriangle, ArrowLeft, CheckCircle2, ChevronDown, ChevronUp } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
 import { type Question } from "@/lib/assessment-data"
@@ -12,6 +12,7 @@ interface QuestionCardProps {
   questionNumber: number
   totalQuestions: number
   onAnswer: (score: number) => void
+  onBack: () => void
 }
 
 export function QuestionCard({
@@ -19,6 +20,7 @@ export function QuestionCard({
   questionNumber,
   totalQuestions,
   onAnswer,
+  onBack,
 }: QuestionCardProps) {
   const [selectedScore, setSelectedScore] = useState<number | null>(null)
   const [showDetails, setShowDetails] = useState(false)
@@ -39,9 +41,18 @@ export function QuestionCard({
       <header className="px-6 py-6 border-b border-border">
         <div className="max-w-4xl mx-auto">
           <div className="flex items-center justify-between mb-4">
-            <span className="text-sm text-muted-foreground">
-              Question {questionNumber} of {totalQuestions}
-            </span>
+            <div className="flex items-center gap-4">
+              <button
+                onClick={onBack}
+                className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
+              >
+                <ArrowLeft className="w-4 h-4" />
+                Back
+              </button>
+              <span className="text-sm text-muted-foreground">
+                Question {questionNumber} of {totalQuestions}
+              </span>
+            </div>
             <span className="text-sm font-medium text-accent">{question.dimension}</span>
           </div>
           <div className="h-1 bg-secondary rounded-full overflow-hidden">

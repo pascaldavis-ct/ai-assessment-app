@@ -33,6 +33,17 @@ export default function AIHealthCheck() {
     }
   }
 
+  const handleBack = () => {
+    if (currentQuestionIndex > 0) {
+      // Remove the last answer and go back
+      setAnswers((prev) => prev.slice(0, -1))
+      setCurrentQuestionIndex((prev) => prev - 1)
+    } else {
+      // Go back to intro
+      setCurrentStep("intro")
+    }
+  }
+
   const handleRestart = () => {
     setCurrentStep("intro")
     setCurrentQuestionIndex(0)
@@ -48,6 +59,7 @@ export default function AIHealthCheck() {
           questionNumber={currentQuestionIndex + 1}
           totalQuestions={questions.length}
           onAnswer={handleAnswer}
+          onBack={handleBack}
         />
       )}
       {currentStep === "results" && <ResultsScreen answers={answers} onRestart={handleRestart} />}
