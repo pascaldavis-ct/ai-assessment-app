@@ -64,14 +64,14 @@ export const questions: Question[] = [
   {
     id: 1,
     dimension: "PRIORITIZATION",
-    shortTitle: "Clarity",
-    question: "How evidence-based is the pipeline for selecting and sequencing AI work?",
+    shortTitle: "Roadmap",
+    question: "Is there a clear AI roadmap—and is it based on evidence or enthusiasm?",
     clarifiers: [
       "Do you rank use cases by value, feasibility, risk, and data readiness—or by who yells loudest?",
       "Are you solving business outcomes or shopping for models?",
       "Do you have baselines (time, cost, quality) before you 'improve' anything?"
     ],
-    healthyLooksLike: "A repeatable rubric (value, feasibility, risk, data readiness, change readiness), use cases framed as outcomes, baselines before claims.",
+    healthyLooksLike: "Clear criteria for evaluating opportunities (value, feasibility, risk, data readiness), use cases framed as outcomes, baselines before claims.",
     redFlags: [
       "A long list of ideas, no ranking",
       "\"We're doing AI everywhere\"",
@@ -80,28 +80,28 @@ export const questions: Question[] = [
     answerOptions: [
       {
         score: 1,
-        label: "No method",
-        description: "Priorities driven by whoever yells loudest or latest vendor demo. No baselines, no ranking."
+        label: "No roadmap",
+        description: "Just a wish list of 'AI ideas' with no prioritization or success criteria."
       },
       {
         score: 2,
-        label: "Ad hoc decisions",
-        description: "Some discussion of priorities but no repeatable framework. Decisions feel political."
+        label: "Vibes-based roadmap",
+        description: "A plan exists but driven by hype cycles, vendor demos, or loudest voices."
       },
       {
         score: 3,
-        label: "Emerging discipline",
-        description: "A rubric exists on paper. Some baselines captured, but not consistently applied."
+        label: "Partially grounded",
+        description: "Some evidence and business cases exist but inconsistently applied."
       },
       {
         score: 4,
-        label: "Structured pipeline",
-        description: "Use cases ranked by value/feasibility/risk with baselines. Outcome-focused, not tool-focused."
+        label: "Evidence-based roadmap",
+        description: "Priorities ranked by real value and feasibility, baselines defined before 'improvement' claims."
       },
       {
         score: 5,
-        label: "Rigorous prioritization",
-        description: "Repeatable rubric consistently applied. Every initiative has baselines, owners, and clear sequencing."
+        label: "Disciplined roadmap",
+        description: "Clear sequencing, every initiative has baselines and kill criteria, outcome-focused."
       }
     ]
   },
