@@ -65,7 +65,7 @@ export const questions: Question[] = [
     id: 1,
     dimension: "PRIORITIZATION",
     shortTitle: "Roadmap",
-    question: "Is there a clear AI roadmap—clear to all—and is it based on evidence or enthusiasm?",
+    question: "Is there a clear AI roadmap—clear to all—based on secure data foundations and robust prioritization for impact?",
     clarifiers: [
       "Do you rank use cases by value, feasibility, risk, and data readiness—or by who yells loudest?",
       "Are you solving business outcomes or shopping for models?",
