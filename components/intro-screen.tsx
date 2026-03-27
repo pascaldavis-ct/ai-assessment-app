@@ -10,7 +10,7 @@ interface IntroScreenProps {
 
 const dimensions = [
   { icon: Sparkles, label: "Executive Ownership", description: "Who sponsors AI with real authority?" },
-  { icon: Target, label: "Prioritization", description: "How evidence-based is your pipeline?" },
+  { icon: Target, label: "Roadmap", description: "Is your AI roadmap clear—and clear to all?" },
   { icon: Shield, label: "Trust & Safety", description: "Can teams move fast without breaking trust?" },
   { icon: Users, label: "Adoption Engine", description: "Who makes adoption actually happen?" },
   { icon: Rocket, label: "Momentum", description: "Are pilots built to scale—or impress?" },
