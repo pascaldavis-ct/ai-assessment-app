@@ -81,27 +81,27 @@ export const questions: Question[] = [
       {
         score: 1,
         label: "No roadmap",
-        description: "Just a wish list of 'AI ideas' with no prioritization or success criteria."
+        description: "Just a wish list of 'AI ideas.' No data strategy, no prioritization. Without data foundations, AI can't fly."
       },
       {
         score: 2,
         label: "Vibes-based roadmap",
-        description: "A plan exists but driven by hype cycles, vendor demos, or loudest voices."
+        description: "A plan exists but ignores data readiness. Driven by hype, not by what's actually possible with your data."
       },
       {
         score: 3,
         label: "Partially grounded",
-        description: "Some evidence and business cases exist but inconsistently applied."
+        description: "Some data foundations in place, but gaps remain. Prioritization inconsistent—some use cases flying blind."
       },
       {
         score: 4,
-        label: "Evidence-based roadmap",
-        description: "Priorities ranked by real value and feasibility, baselines defined before 'improvement' claims."
+        label: "Data-ready roadmap",
+        description: "Priorities ranked by impact AND data readiness. Foundations secure, baselines defined, no AI theater."
       },
       {
         score: 5,
-        label: "Disciplined roadmap",
-        description: "Clear sequencing, every initiative has baselines and kill criteria, outcome-focused."
+        label: "Disciplined, data-first roadmap",
+        description: "Secure data foundations, clear sequencing by impact, kill criteria enforced. AI can fly because the runway is built."
       }
     ]
   },
